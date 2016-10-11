@@ -10,7 +10,7 @@ angular.module('myApp', [
   });
 
   $urlRouterProvider
-  .otherwise('/login');
+    .otherwise('/login');
 
   $stateProvider.state({
     name: 'login',
