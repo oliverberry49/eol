@@ -9,20 +9,18 @@ angular.module('myApp', [
     enabled: true
   });
 
+  $stateProvider
+    .state('login', {
+      url: '/login',
+      templateUrl: 'login/login.html',
+      controller: 'LoginCtrl'
+    })
+    .state('view1', {
+      url: '/view1',
+      templateUrl: 'view1/view1.html',
+      controller: 'View1Ctrl'
+    });
+
   $urlRouterProvider
-    .otherwise('/login');
-
-  $stateProvider.state({
-    name: 'login',
-    url: '/login',
-    templateUrl: 'login/login.html',
-    controller: 'LoginCtrl'
-  });
-
-  $stateProvider.state({
-    name: 'view1',
-    url: '/view1',
-    templateUrl: 'view1/view1.html',
-    controller: 'View1Ctrl'
-  });
+    .otherwise('/view1');
 });

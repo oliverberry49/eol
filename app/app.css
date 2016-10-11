@@ -33,6 +33,10 @@ html, body, .eol-container {
   font-size: 30px;
 }
 
+.eol-h2 {
+
+}
+
 .eol-h3 {
   margin-top: 40px;
   color: white;
@@ -76,6 +80,14 @@ html, body, .eol-container {
   height: 100%;
   background-color: #53585F;
   padding: 40px;
+  float: left;
+}
+
+.eol-dashboard {
+  width: 70%;
+  height: 100%;
+  padding: 20px;
+  float: left;
 }
 
 .eol-logo {
@@ -111,3 +123,14 @@ html, body, .eol-container {
 }
 
 /* Bootstrap overrides */
+
+/* Graph */
+
+#xaxis .domain, #yaxis .domain {
+  fill:none;
+  stroke:#000;
+}
+
+#xaxis text, #yaxis text {
+  font-size: 12px;
+}
