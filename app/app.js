@@ -4,7 +4,14 @@ angular.module('myApp', [
   'ui.router'
 ])
 
-.config(function($stateProvider) {
+.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+  $locationProvider.html5Mode({
+    enabled: true
+  });
+
+  $urlRouterProvider
+  .otherwise('/login');
+
   $stateProvider.state({
     name: 'login',
     url: '/login',
