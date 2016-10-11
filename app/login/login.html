@@ -1,0 +1,19 @@
+<div class="eol-login">
+  <div class="eol-login-box">
+    <h1 class="eol-h1">IT Assets Life Cycle Reporting</h1>
+    <div class="eol-full-width">
+      <span class="eol-login-label">Username: </span>
+      <input class="eol-login-input" type="text" ng-model="username"></input>
+    </div>
+    <div class="eol-full-width">
+      <span class="eol-login-label">Password: </span>
+      <input class="eol-login-input" type="password" ng-model="password"></input>
+    </div>
+    <div class="eol-full-width">
+      <button class="btn btn-login" ng-click="login()">Login</button>
+    </div>
+    <div class="eol-full-width eol-login-error">
+      {{error}}
+    </div>
+  </div>
+</div>

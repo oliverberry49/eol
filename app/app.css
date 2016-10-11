@@ -1,0 +1,113 @@
+html, body, .eol-container {
+  height: 100%;
+}
+
+.eol-login {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  background-color: #53585F;
+  height: 100%;
+}
+
+.eol-login-box {
+  width: 400px;
+  height: 600px;
+  background: white;
+  border: 2px solid #bbb;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  align-content: center;
+  padding: 40px;
+}
+
+.eol-h1 {
+  text-align: center;
+  width: 100%;
+  margin: 0 0 40px 0;
+  color: #53585F;
+  font-family: 'Trebuchet MS1', Helvetica, sans-serif;
+  font-weight: lighter;
+  font-size: 30px;
+}
+
+.eol-h3 {
+  margin-top: 40px;
+  color: white;
+  text-align: center;
+}
+
+.eol-full-width {
+  width: 100%;
+  margin: 5px 0;
+}
+
+.eol-login-label {
+  width: 100px;
+  display: inline-block;
+}
+
+.eol-login-input {
+  width: 212px;
+}
+
+.btn-login {
+  width: 100%;
+  margin: 40px 0 0 0;
+  border-radius: 0;
+  background-color: #53585F;
+  border: none;
+  color: white;
+}
+
+.btn-login:hover, .btn-login:focus {
+  color: white;
+}
+
+.eol-login-error {
+  height: 50px;
+  text-align: center;
+}
+
+.eol-sidebar {
+  width: 30%;
+  height: 100%;
+  background-color: #53585F;
+  padding: 40px;
+}
+
+.eol-logo {
+  width: calc(100% - 20px);
+  margin-left: 10px;
+  align-self: center;
+}
+
+.eol-text {
+  width: calc(100% - 60px);
+}
+
+.eol-ask-question {
+  width: 100%;
+}
+
+.eol-ask-question .eol-input-group {
+  display: inline-block;
+  width: calc(100% - 120px);
+  border-radius: 0;
+  border-color: #468C3E;
+}
+
+.eol-ask-question .eol-input-addon {
+  display: inline-block;
+  width: 120px;
+  height: 34px;
+  border-radius: 0;
+  background-color: #468C3E;
+  border: none;
+  color: white;
+  text-shadow: none;
+}
+
+/* Bootstrap overrides */

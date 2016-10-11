@@ -1,0 +1,20 @@
+{
+  "name": "EoL",
+  "private": true,
+  "version": "0.0.0",
+  "description": "IT Assets Life Cycle Reporting",
+  "repository": "https://github.com/angular/angular-seed",
+  "license": "MIT",
+  "devDependencies": {
+    "http-server": "^0.9.0"
+  },
+  "scripts": {
+    "prestart": "npm install",
+    "start": "node ./app.js",
+    "pretest": "npm install"
+  },
+  "dependencies": {
+    "cfenv": "1.0.x",
+    "express": "^4.14.0"
+  }
+}
