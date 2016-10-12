@@ -2,12 +2,13 @@
 
 angular.module('myApp')
 
-.controller('LoginCtrl', ['$scope', '$location', function($scope, $location) {
+.controller('LoginCtrl', ['$scope', '$state', 'AuthService', function($scope, $state, AuthService) {
   $scope.login = function() {
-    // if ($scope.username === 'astellas' && $scope.password === '123') {
-      $location.path('/view1');
-    // } else {
-    //   $scope.error = 'Wrong username or password';
-    // }
+    var loggedIn = AuthService.login($scope.username, $scope.password);
+    if (loggedIn) {
+      $state.go('home.dashboard');
+    } else {
+      $scope.error = 'Wrong username or password';
+    }
   };
 }]);

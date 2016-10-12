@@ -2,7 +2,10 @@
 
 angular.module('myApp')
 
-.controller('HomeCtrl', ['$scope', '$state', '$window', 'DateService', function($scope, $state, $window, DateService) {
+.controller('HomeCtrl', ['$scope', '$state', '$window', 'DateService', 'AuthService', function($scope, $state, $window, DateService, AuthService) {
+  if (!AuthService.isLoggedIn()) {
+    $state.go('login');
+  }
 
   $scope.convertToDate = function(dateString) {
     if (dateString) {

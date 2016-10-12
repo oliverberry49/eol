@@ -2,7 +2,10 @@
 
 angular.module('myApp')
 
-.controller('DashboardCtrl', ['$scope', '$window', '$state', 'DateService', function($scope, $window, $state, DateService) {
+.controller('DashboardCtrl', ['$scope', '$window', '$state', 'DateService', 'AuthService', function($scope, $window, $state, DateService, AuthService) {
+  if (!AuthService.isLoggedIn()) {
+    $state.go('login');
+  }
 
   function colourLuminance(hex, lum) {
     // validate hex string

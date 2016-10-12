@@ -2,7 +2,11 @@
 
 angular.module('myApp')
 
-.controller('TableCtrl', ['$scope', function($scope) {
+.controller('TableCtrl', ['$scope', '$state', 'AuthService', function($scope, $state, AuthService) {
+  if (!AuthService.isLoggedIn()) {
+    $state.go('login');
+  }
+
   $scope.getClass = function(d, i) {
     var dateString;
     if (i === 1) {
