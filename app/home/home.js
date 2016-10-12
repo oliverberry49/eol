@@ -2,7 +2,7 @@
 
 angular.module('myApp')
 
-.controller('HomeCtrl', ['$scope', '$state', '$window', function($scope, $state, $window) {
+.controller('HomeCtrl', ['$scope', '$state', '$window', 'DateService', function($scope, $state, $window, DateService) {
 
   $scope.convertToDate = function(dateString) {
     if (dateString) {
@@ -53,6 +53,14 @@ angular.module('myApp')
     maxDate: new Date(),
     minDate: new Date(),
   };
+
+  var updateDates = function() {
+    $scope.startDate = DateService.getStartDate();
+    $scope.endDate = DateService.getEndDate();
+    $scope.$apply();
+  };
+
+  DateService.registerObserverCallback(updateDates);
 
   var d3 = $window.d3;
   var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'System Classification', 'MODEL']; // 'Application'
@@ -125,8 +133,8 @@ angular.module('myApp')
       return;
     }
 
-    $scope.startDate = $scope.dateOptions.minDate;
-    $scope.endDate = $scope.dateOptions.maxDate;
+    DateService.setStartDate($scope.dateOptions.minDate);
+    DateService.setEndDate($scope.dateOptions.maxDate);
   });
 
   $scope.hwEol = {};
@@ -146,8 +154,8 @@ angular.module('myApp')
       return;
     }
 
-    $scope.startDate = $scope.dateOptions.minDate;
-    $scope.endDate = $scope.dateOptions.maxDate;
+    DateService.setStartDate($scope.dateOptions.minDate);
+    DateService.setEndDate($scope.dateOptions.maxDate);
   });
 
   $scope.resetFilters();

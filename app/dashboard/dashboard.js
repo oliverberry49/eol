@@ -2,7 +2,7 @@
 
 angular.module('myApp')
 
-.controller('DashboardCtrl', ['$scope', '$window', '$state', function($scope, $window, $state) {
+.controller('DashboardCtrl', ['$scope', '$window', '$state', 'DateService', function($scope, $window, $state, DateService) {
 
   function colourLuminance(hex, lum) {
     // validate hex string
@@ -160,7 +160,21 @@ angular.module('myApp')
           })
           .style('fill', function(d, i) { return colorScale(i); })
           .attr('width', function() { return 0; })
-          .on("click", function() {
+          .on("click", function(d, i) {
+            if (i === 0) {
+              DateService.setEndDate(Date.now());
+            } else {
+              DateService.setStartDate(Date.now());
+              if (i === 1) {
+                DateService.setEndDate($scope.sixMonths);
+              } else if (i === 2) {
+                DateService.setEndDate($scope.twelveMonths);
+              } else if (i === 3) {
+                DateService.setEndDate($scope.eighteenMonths);
+              } else if (i === 4) {
+                DateService.setEndDate($scope.twentyfourMonths);
+              }
+            }
             $state.go('home.table');
           })
           .on('mouseover', function(d, i) {
