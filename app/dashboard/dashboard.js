@@ -2,7 +2,26 @@
 
 angular.module('myApp')
 
-.controller('View1Ctrl', ['$scope', '$http', '$q', '$window', function($scope, $http, $q, $window) {
+.controller('DashboardCtrl', ['$scope', '$window', '$state', function($scope, $window, $state) {
+
+  function colourLuminance(hex, lum) {
+    // validate hex string
+    hex = String(hex).replace(/[^0-9a-f]/gi, '');
+    if (hex.length < 6) {
+      hex = hex[0]+hex[0]+hex[1]+hex[1]+hex[2]+hex[2];
+    }
+    lum = lum || 0;
+
+    // convert to decimal and change luminosity
+    var rgb = "#", c, i;
+    for (i = 0; i < 3; i++) {
+      c = parseInt(hex.substr(i*2,2), 16);
+      c = Math.round(Math.min(Math.max(0, c + (c * lum)), 255)).toString(16);
+      rgb += ("00"+c).substr(c.length);
+    }
+
+    return rgb;
+  }
 
   var d3 = $window.d3;
   var overview = {
@@ -57,13 +76,18 @@ angular.module('myApp')
     var max = Math.max(...dollars);
     max = Math.ceil(max / 10) * 10;
 
+    var rect = angular.element(document.getElementById('eol-dashboard'))[0].getBoundingClientRect();
+    var canvasWidth = rect.right - rect.left - 50;
+    var canvasHeight = rect.bottom - rect.top;
+    canvasHeight = (canvasHeight > 550) ? 550 : canvasHeight;
+
     var canvas = d3.select('#eol-graph')
         .append('svg')
-        .attr({'width': 900,'height': 550});
+        .attr({'width': canvasWidth,'height': canvasHeight});
 
-    var margin = {top: 20, right: 20, bottom: 70, left: 150};
-    var width = canvas.attr("width") - margin.left - margin.right;
-    var height = canvas.attr("height") - margin.top - margin.bottom;
+    var margin = {top: 20, right: 20, bottom: 70, left: 100};
+    var width = canvasWidth - margin.left - margin.right;
+    var height = canvasHeight - margin.top - margin.bottom;
 
     var colors = ['#dc3912','#ff9900','#fdae6b','#ebcd30','#98df8a'];
 
@@ -97,7 +121,6 @@ angular.module('myApp')
         .scale(yscale)
         .tickValues(d3.range(categories.length))
         .tickFormat(function(d, i) {
-          console.log(i);
           return categories[i];
         });
 
@@ -126,7 +149,16 @@ angular.module('myApp')
           'y': function(d, i) { return yscale(i) + 10; }
         })
         .style('fill', function(d, i) { return colorScale(i); })
-        .attr('width', function() { return 0; });
+        .attr('width', function() { return 0; })
+        .on("click", function() {
+          $state.go('home.table');
+        })
+        .on('mouseover', function(d, i) {
+          d3.select(this).style("fill", colourLuminance(colorScale(i), 0.2));
+        })
+        .on('mouseout', function(d, i) {
+          d3.select(this).style("fill", colorScale(i));
+        });
 
     d3.select("svg").selectAll("rect")
         .data(dollars)

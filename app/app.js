@@ -15,12 +15,22 @@ angular.module('myApp', [
       templateUrl: 'login/login.html',
       controller: 'LoginCtrl'
     })
-    .state('view1', {
-      url: '/view1',
-      templateUrl: 'view1/view1.html',
-      controller: 'View1Ctrl'
+    .state('home', {
+      url: '/home',
+      templateUrl: 'home/home.html',
+      controller: 'HomeCtrl'
+    })
+    .state('home.dashboard', {
+      url: '/dashboard',
+      templateUrl: 'dashboard/dashboard.html',
+      controller: 'DashboardCtrl'
+    })
+    .state('home.table', {
+      url: '/table',
+      templateUrl: 'table/table.html',
+      controller: 'TableCtrl'
     });
 
   $urlRouterProvider
-    .otherwise('/view1');
+    .otherwise('/home');
 });

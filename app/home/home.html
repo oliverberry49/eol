@@ -1,0 +1,104 @@
+<div class="eol-sidebar">
+  <a ui-sref="home.dashboard">
+    <img src="images/astellas.png" class="eol-logo" />
+    <h3 class="eol-h3">IT Assets Life Cycle Reporting</h3>
+  </a>
+
+  <div class="eol-filter" style="margin-top: 50px">
+    <label class="eol-label">OS</label>
+    <div class="dropdown eol-dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{filter.os}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="(option, val) in filterOptions.os" ng-click="filter.os = option"><a href="#">{{option}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="eol-filter">
+    <label class="eol-label">Region</label>
+    <div class="dropdown eol-dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{filter.region}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="(option, val) in filterOptions.region" ng-click="filter.region = option"><a href="#">{{option}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="eol-filter">
+    <label class="eol-label">Location</label>
+    <div class="dropdown eol-dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{filter.loc}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="(option, val) in filterOptions.loc" ng-click="filter.loc = option"><a href="#">{{option}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="eol-filter">
+    <label class="eol-label">Environment</label>
+    <div class="dropdown eol-dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{filter.env}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="(option, val) in filterOptions.env" ng-click="filter.env = option"><a href="#">{{option}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="eol-filter">
+    <label class="eol-label">Model</label>
+    <div class="dropdown eol-dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{filter.model}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="(option, val) in filterOptions.model" ng-click="filter.model = option"><a href="#">{{option}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="eol-filter">
+    <label class="eol-label">Application</label>
+    <div class="dropdown eol-dropdown">
+      <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        {{filter.app}}
+        <span class="caret"></span>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <li ng-repeat="(option, val) in filterOptions.app" ng-click="filter.app = option"><a href="#">{{option}}</a></li>
+      </ul>
+    </div>
+  </div>
+
+<!--   <p class="input-group">
+    <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+  </p>
+
+  <p class="input-group">
+    <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+    <span class="input-group-btn">
+      <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+    </span>
+  </p> -->
+
+  <button class="btn btn-default eol-filter-btn" style="margin-top: 30px" ng-click="getTable()">Get Assets</button>
+  <hr>
+  <button class="btn btn-default eol-filter-btn" ng-click="resetFilters()">Reset filters</button>
+</div>
+
+<div ui-view class="eol-home"></div>

@@ -34,13 +34,19 @@ html, body, .eol-container {
 }
 
 .eol-h2 {
-
+  margin: 40px 20px 20px 20px;
 }
 
 .eol-h3 {
   margin-top: 40px;
   color: white;
   text-align: center;
+}
+
+.eol-home {
+  float: left;
+  width: 70%;
+  height: 100%;
 }
 
 .eol-full-width {
@@ -83,16 +89,40 @@ html, body, .eol-container {
   float: left;
 }
 
+.eol-filter {
+  height: 40px;
+}
+
+.eol-label {
+  color: white;
+  width: 100px;
+}
+
+.eol-dropdown {
+  display: inline-block;
+  width: calc(100% - 110px);
+}
+
+.eol-dropdown button {
+  width: 100%;
+  border-radius: 0;
+}
+
+.eol-filter-btn {
+  width: 100%;
+  border-radius: 0;
+}
+
 .eol-dashboard {
-  width: 70%;
+  width: 100%;
   height: 100%;
-  padding: 20px;
+  /*padding: 20px;*/
   float: left;
+  overflow-y: scroll;
 }
 
 .eol-logo {
   width: calc(100% - 20px);
-  margin-left: 10px;
   align-self: center;
 }
 
@@ -123,6 +153,15 @@ html, body, .eol-container {
 }
 
 /* Bootstrap overrides */
+
+a:focus, a:hover {
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  max-height: 305px;
+  overflow-y: scroll;
+}
 
 /* Graph */
 

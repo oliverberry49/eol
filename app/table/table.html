@@ -1,0 +1,10 @@
+<div class="eol-dashboard" id="eol-dashboard">
+  <h2 class="eol-h2">EoL Asset Overview</h2>
+
+  <table class="table table-striped">
+    <th ng-repeat="header in headers">{{header}}</th>
+    <tr ng-repeat="row in rows | filter:criteriaMatch">
+      <td ng-repeat="data in row track by $index">{{data}}</td>
+    </tr>
+  </table>
+</div>
