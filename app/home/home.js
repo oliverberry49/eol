@@ -27,6 +27,16 @@ angular.module('myApp')
 
   var filterIndexes = ['', 'os', 'region', 'loc', 'env', 'model', 'app'];
 
+  var now = Date.now();
+  $scope.sixMonths = new Date(now);
+  $scope.sixMonths.setMonth($scope.sixMonths.getMonth() + 6);
+  $scope.twelveMonths = new Date(now);
+  $scope.twelveMonths.setMonth($scope.twelveMonths.getMonth() + 12);
+  $scope.eighteenMonths = new Date(now);
+  $scope.eighteenMonths.setMonth($scope.eighteenMonths.getMonth() + 18);
+  $scope.twentyfourMonths = new Date(now);
+  $scope.twentyfourMonths.setMonth($scope.twentyfourMonths.getMonth() + 24);
+
   $scope.filterOptions = {
     os: {'All': true},
     region: {'All': true},
@@ -61,7 +71,26 @@ angular.module('myApp')
     }
 
     $scope.rows = rows;
-    console.log($scope.rows);
+  });
+
+  $scope.osEol = {};
+  d3.csv('os_eol.csv', function(d) {
+    $scope.osEol[d.OS] = d['EoL or EoS Date'];
+  }, function(error, rows) {
+    if (error) {
+      console.log(error);
+      return;
+    }
+  });
+
+  $scope.hwEol = {};
+  d3.csv('hw_eol.csv', function(d) {
+    $scope.hwEol[d.Model] = d['EoL or EoS Date'];
+  }, function(error, rows) {
+    if (error) {
+      console.log(error);
+      return;
+    }
   });
 
   $scope.resetFilters();

@@ -123,39 +123,33 @@ html, body, .eol-container {
 
 .eol-logo {
   width: calc(100% - 20px);
-  align-self: center;
 }
 
-.eol-text {
-  width: calc(100% - 60px);
+.eol-overdue {
+  color: #dc3912;
 }
 
-.eol-ask-question {
-  width: 100%;
+.eol-six-months {
+  color: #ff9900;
 }
 
-.eol-ask-question .eol-input-group {
-  display: inline-block;
-  width: calc(100% - 120px);
-  border-radius: 0;
-  border-color: #468C3E;
+.eol-twelve-months {
+  color: #fdae6b;
 }
 
-.eol-ask-question .eol-input-addon {
-  display: inline-block;
-  width: 120px;
-  height: 34px;
-  border-radius: 0;
-  background-color: #468C3E;
-  border: none;
-  color: white;
-  text-shadow: none;
+.eol-eighteen-months {
+  color: #ebcd30;
+}
+
+.eol-twentyfour-months {
+  color: #98df8a;
 }
 
 /* Bootstrap overrides */
 
 a:focus, a:hover {
   text-decoration: none;
+  cursor: pointer;
 }
 
 .dropdown-menu {

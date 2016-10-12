@@ -4,7 +4,11 @@
   <table class="table table-striped">
     <th ng-repeat="header in headers">{{header}}</th>
     <tr ng-repeat="row in rows | filter:criteriaMatch">
-      <td ng-repeat="data in row track by $index">{{data}}</td>
+      <td ng-repeat="data in row track by $index">
+        <a ng-if="$index === 1" uib-tooltip="EoL: {{osEol[data] || 'Unknown'}}" ng-class="getClass(data, $index)">{{data}}</a>
+        <a ng-if="$index === 5" uib-tooltip="EoL: {{hwEol[data] || 'Unknown'}}" ng-class="getClass(data, $index)">{{data}}</a>
+        <span ng-if="$index !== 1 && $index !== 5">{{data}}</span>
+      </td>
     </tr>
   </table>
 </div>

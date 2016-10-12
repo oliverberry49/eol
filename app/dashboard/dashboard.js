@@ -31,30 +31,21 @@ angular.module('myApp')
     eighteen: 0,
     twentyfour: 0
   };
-  var now = Date.now();
-  var sixMonths = new Date(now);
-  sixMonths.setMonth(sixMonths.getMonth() + 6);
-  var twelveMonths = new Date(now);
-  twelveMonths.setMonth(twelveMonths.getMonth() + 12);
-  var eighteenMonths = new Date(now);
-  eighteenMonths.setMonth(eighteenMonths.getMonth() + 18);
-  var twentyfourMonths = new Date(now);
-  twentyfourMonths.setMonth(twentyfourMonths.getMonth() + 24);
 
   d3.csv('os_eol.csv', function(d) {
-    var dateString = d['EoL or EoS  Date'];
+    var dateString = d['EoL or EoS Date'];
     var split = dateString.split('/');
     var date = new Date(split[2], split[1], split[0]);
 
-    if (date < now) {
+    if (date < Date.now()) {
       overview.overdue++;
-    } else if (date < sixMonths) {
+    } else if (date < $scope.sixMonths) {
       overview.six++;
-    } else if (date < twelveMonths) {
+    } else if (date < $scope.twelveMonths) {
       overview.twelve++;
-    } else if (date < eighteenMonths) {
+    } else if (date < $scope.eighteenMonths) {
       overview.eighteen++;
-    } else if (date < twentyfourMonths) {
+    } else if (date < $scope.twentyfourMonths) {
       overview.twentyfour++;
     }
 
@@ -73,15 +64,15 @@ angular.module('myApp')
       var split = dateString.split('/');
       var date = new Date(split[2], split[1], split[0]);
 
-      if (date < now) {
+      if (date < Date.now()) {
         overview.overdue++;
-      } else if (date < sixMonths) {
+      } else if (date < $scope.sixMonths) {
         overview.six++;
-      } else if (date < twelveMonths) {
+      } else if (date < $scope.twelveMonths) {
         overview.twelve++;
-      } else if (date < eighteenMonths) {
+      } else if (date < $scope.eighteenMonths) {
         overview.eighteen++;
-      } else if (date < twentyfourMonths) {
+      } else if (date < $scope.twentyfourMonths) {
         overview.twentyfour++;
       }
 
