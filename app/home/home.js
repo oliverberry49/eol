@@ -4,6 +4,14 @@ angular.module('myApp')
 
 .controller('HomeCtrl', ['$scope', '$state', '$window', function($scope, $state, $window) {
 
+  $scope.convertToDate = function(dateString) {
+    if (dateString) {
+      var split = dateString.split('/');
+      var date = new Date(split[2], split[1], split[0]);
+      return date;
+    }
+  };
+
   $scope.getTable = function() {
     $state.transitionTo('home.table');
   };
@@ -17,6 +25,33 @@ angular.module('myApp')
       model: "All",
       app: "All"
     };
+  };
+
+  // Date picker
+
+  $scope.clear = function() {
+    $scope.dt = null;
+  };
+
+  $scope.open1 = function() {
+    $scope.popup1.opened = true;
+  };
+
+  $scope.open2 = function() {
+    $scope.popup2.opened = true;
+  };
+
+  $scope.popup1 = {
+    opened: false
+  };
+
+  $scope.popup2 = {
+    opened: false
+  };
+
+  $scope.dateOptions = {
+    maxDate: new Date(),
+    minDate: new Date(),
   };
 
   var d3 = $window.d3;
@@ -75,22 +110,44 @@ angular.module('myApp')
 
   $scope.osEol = {};
   d3.csv('os_eol.csv', function(d) {
-    $scope.osEol[d.OS] = d['EoL or EoS Date'];
+    var date = d['EoL or EoS Date'];
+    $scope.osEol[d.OS] = date;
+
+    date = $scope.convertToDate(date);
+    if (date < $scope.dateOptions.minDate) {
+      $scope.dateOptions.minDate = date;
+    } else if (date > $scope.dateOptions.maxDate) {
+      $scope.dateOptions.maxDate = date;
+    }
   }, function(error, rows) {
     if (error) {
       console.log(error);
       return;
     }
+
+    $scope.startDate = $scope.dateOptions.minDate;
+    $scope.endDate = $scope.dateOptions.maxDate;
   });
 
   $scope.hwEol = {};
   d3.csv('hw_eol.csv', function(d) {
-    $scope.hwEol[d.Model] = d['EoL or EoS Date'];
+    var date = d['EoL or EoS Date'];
+    $scope.hwEol[d.Model] = date;
+
+    date = $scope.convertToDate(date);
+    if (date < $scope.dateOptions.minDate) {
+      $scope.dateOptions.minDate = date;
+    } else if (date > $scope.dateOptions.maxDate) {
+      $scope.dateOptions.maxDate = date;
+    }
   }, function(error, rows) {
     if (error) {
       console.log(error);
       return;
     }
+
+    $scope.startDate = $scope.dateOptions.minDate;
+    $scope.endDate = $scope.dateOptions.maxDate;
   });
 
   $scope.resetFilters();

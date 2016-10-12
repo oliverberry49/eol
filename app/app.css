@@ -93,6 +93,10 @@ html, body, .eol-container {
   height: 40px;
 }
 
+.eol-date-filter {
+  height: 80px;
+}
+
 .eol-label {
   color: white;
   width: 100px;

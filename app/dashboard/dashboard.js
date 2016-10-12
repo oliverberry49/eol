@@ -33,9 +33,7 @@ angular.module('myApp')
   };
 
   d3.csv('os_eol.csv', function(d) {
-    var dateString = d['EoL or EoS Date'];
-    var split = dateString.split('/');
-    var date = new Date(split[2], split[1], split[0]);
+    var date = $scope.convertToDate(d['EoL or EoS Date']);
 
     if (date < Date.now()) {
       overview.overdue++;
@@ -60,9 +58,7 @@ angular.module('myApp')
     }
 
     d3.csv('hw_eol.csv', function(d) {
-      var dateString = d['EoL or EoS Date'];
-      var split = dateString.split('/');
-      var date = new Date(split[2], split[1], split[0]);
+      var date = $scope.convertToDate(d['EoL or EoS Date']);
 
       if (date < Date.now()) {
         overview.overdue++;

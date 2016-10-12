@@ -3,14 +3,6 @@
 angular.module('myApp')
 
 .controller('TableCtrl', ['$scope', function($scope) {
-  console.log($scope.filter);
-
-  var convertToDate = function(dateString) {
-    var split = dateString.split('/');
-    var date = new Date(split[2], split[1], split[0]);
-    return date;
-  };
-
   $scope.getClass = function(d, i) {
     var dateString;
     if (i === 1) {
@@ -19,7 +11,7 @@ angular.module('myApp')
       dateString = $scope.hwEol[d];
     }
     if (dateString) {
-      var date = convertToDate(dateString);
+      var date = $scope.convertToDate(dateString);
 
       if (date < Date.now()) {
         return 'eol-overdue';
@@ -43,10 +35,15 @@ angular.module('myApp')
     var env = row[4];
     var model = row[5];
 
+    var osEol = $scope.convertToDate($scope.osEol[os]);
+    var hwEol = $scope.convertToDate($scope.hwEol[model]);
+
     return ($scope.filter.os === 'All' || $scope.filter.os === os) &&
       ($scope.filter.region === 'All' || $scope.filter.region === region) &&
       ($scope.filter.loc === 'All' || $scope.filter.loc === loc) &&
       ($scope.filter.env === 'All' || $scope.filter.env === env) &&
-      ($scope.filter.model === 'All' || $scope.filter.model === model);
+      ($scope.filter.model === 'All' || $scope.filter.model === model) &&
+      ((osEol > $scope.startDate && osEol < $scope.endDate) ||
+        (hwEol > $scope.startDate && hwEol < $scope.endDate));
   };
 }]);

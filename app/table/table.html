@@ -1,9 +1,9 @@
 <div class="eol-dashboard" id="eol-dashboard">
-  <h2 class="eol-h2">EoL Asset Overview</h2>
+  <h2 class="eol-h2">EoL Asset Overview <small>({{filteredResult.length}})</small></h2>
 
   <table class="table table-striped">
     <th ng-repeat="header in headers">{{header}}</th>
-    <tr ng-repeat="row in rows | filter:criteriaMatch">
+    <tr ng-repeat="row in rows | filter:criteriaMatch as filteredResult">
       <td ng-repeat="data in row track by $index">
         <a ng-if="$index === 1" uib-tooltip="EoL: {{osEol[data] || 'Unknown'}}" ng-class="getClass(data, $index)">{{data}}</a>
         <a ng-if="$index === 5" uib-tooltip="EoL: {{hwEol[data] || 'Unknown'}}" ng-class="getClass(data, $index)">{{data}}</a>
