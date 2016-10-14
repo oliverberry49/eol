@@ -1,5 +1,6 @@
 <div class="eol-dashboard" id="eol-dashboard">
-  <h2 class="eol-h2">EoL Asset Overview <small>({{filteredResult.length}})</small></h2>
+  <h2 class="eol-h2">EoL Asset Overview <small>({{filteredResult.length}} results)</small></h2>
+  <button class="btn btn-default eol-export-btn" ng-csv="exportRows()" filename="eol-assets.csv">Export</button>
 
   <table class="table table-striped">
     <th ng-repeat="header in headers">{{header}}</th>

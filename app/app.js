@@ -2,7 +2,9 @@
 
 angular.module('myApp', [
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'ngSanitize',
+  'ngCsv'
 ])
 
 .config(function($stateProvider, $urlRouterProvider, $locationProvider) {
@@ -13,23 +15,21 @@ angular.module('myApp', [
   $stateProvider
     .state('login', {
       url: '/login',
-      templateUrl: 'login/login.html',
+      templateUrl: 'routes/login/login.html',
       controller: 'LoginCtrl'
     })
     .state('home', {
       url: '/home',
-      templateUrl: 'home/home.html',
+      templateUrl: 'routes/home/home.html',
       controller: 'HomeCtrl'
     })
     .state('home.dashboard', {
       url: '/dashboard',
-      templateUrl: 'dashboard/dashboard.html',
-      controller: 'DashboardCtrl'
+      templateUrl: 'routes/dashboard/dashboard.html'
     })
     .state('home.table', {
       url: '/table',
-      templateUrl: 'table/table.html',
-      controller: 'TableCtrl'
+      templateUrl: 'routes/table/table.html'
     });
 
   $urlRouterProvider

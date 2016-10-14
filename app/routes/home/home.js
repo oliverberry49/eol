@@ -2,10 +2,14 @@
 
 angular.module('myApp')
 
-.controller('HomeCtrl', ['$scope', '$state', '$window', 'DateService', 'AuthService', function($scope, $state, $window, DateService, AuthService) {
+.controller('HomeCtrl', ['$scope', '$state', '$window', '$q', 'DateService', 'AuthService', function($scope, $state, $window, $q, DateService, AuthService) {
   if (!AuthService.isLoggedIn()) {
     $state.go('login');
   }
+
+  $scope.assets = [];
+
+  // General functions
 
   $scope.convertToDate = function(dateString) {
     if (dateString) {
@@ -28,6 +32,81 @@ angular.module('myApp')
       model: "All",
       app: "All"
     };
+  };
+
+  // Table functions
+
+  $scope.getClass = function(d, i) {
+    var dateString;
+    if (i === 1) {
+      dateString = $scope.osEol[d];
+    } else if (i === 5) {
+      dateString = $scope.hwEol[d];
+    }
+    if (dateString) {
+      var date = $scope.convertToDate(dateString);
+
+      if (date < Date.now()) {
+        return 'eol-overdue';
+      } else if (date < $scope.sixMonths) {
+        return 'eol-six-months';
+      } else if (date < $scope.twelveMonths) {
+        return 'eol-twelve-months';
+      } else if (date < $scope.eighteenMonths) {
+        return 'eol-eighteen-months';
+      } else if (date < $scope.twentyfourMonths) {
+        return 'eol-twentyfour-months';
+      }
+    }
+  };
+
+  $scope.criteriaMatch = function(row) {
+    var os = row[1];
+    var region = row[2];
+    var loc = row[3];
+    var env = row[4];
+    var model = row[5];
+
+    var osEol = $scope.convertToDate($scope.osEol[os]);
+    var hwEol = $scope.convertToDate($scope.hwEol[model]);
+
+    return ($scope.filter.os === 'All' || $scope.filter.os === os) &&
+      ($scope.filter.region === 'All' || $scope.filter.region === region) &&
+      ($scope.filter.loc === 'All' || $scope.filter.loc === loc) &&
+      ($scope.filter.env === 'All' || $scope.filter.env === env) &&
+      ($scope.filter.model === 'All' || $scope.filter.model === model) &&
+      ((osEol > $scope.startDate && osEol < $scope.endDate) ||
+        (hwEol > $scope.startDate && hwEol < $scope.endDate));
+  };
+
+  $scope.exportRows = function() {
+    var deferred = $q.defer();
+
+    d3.csv('dataset.csv', function(d) {
+      var criteriaRow = [];
+
+      for (var i in headers) {
+        var header = headers[i];
+        var data = d[header];
+        criteriaRow.push(data);
+      }
+
+      if ($scope.criteriaMatch(criteriaRow)) {
+        return d;
+      }
+    }, function(error, rows) {
+      if (error) {
+        console.log(error);
+        deferred.reject(error);
+        return;
+      }
+
+      var string = d3.csv.format(rows);
+      var allRows = d3.csv.parseRows(string);
+      deferred.resolve(allRows);
+    });
+
+    return deferred.promise;
   };
 
   // Date picker
@@ -65,6 +144,8 @@ angular.module('myApp')
 
   DateService.registerObserverCallback(updateDates);
 
+  // Generate data for table, filters and dashboard
+
   var d3 = $window.d3;
   var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'System Classification', 'MODEL']; // 'Application'
   $scope.headers = ['Host Name', 'OS', 'Region', 'Location', 'Environment', 'Model']; // 'Application'
@@ -91,6 +172,42 @@ angular.module('myApp')
     model: {'All': true},
     app: {'All': true}
   };
+
+  var overview = {
+    overdue: 0,
+    six: 0,
+    twelve: 0,
+    eighteen: 0,
+    twentyfour: 0
+  };
+
+  // CSV Utility functions
+
+  var assignDateBuckets = function(date) {
+    if (date < Date.now()) {
+      overview.overdue++;
+    } else if (date < $scope.sixMonths) {
+      overview.six++;
+    } else if (date < $scope.twelveMonths) {
+      overview.twelve++;
+    } else if (date < $scope.eighteenMonths) {
+      overview.eighteen++;
+    } else if (date < $scope.twentyfourMonths) {
+      overview.twentyfour++;
+    }
+  };
+
+  var assignAssets = function() {
+    $scope.assets = [
+      overview.overdue,
+      overview.six,
+      overview.twelve,
+      overview.eighteen,
+      overview.twentyfour
+    ];
+  };
+
+  // Get CSV files
 
   d3.csv('dataset.csv', function(d) {
     var row = [];
@@ -125,6 +242,8 @@ angular.module('myApp')
     $scope.osEol[d.OS] = date;
 
     date = $scope.convertToDate(date);
+    assignDateBuckets(date);
+
     if (date < $scope.dateOptions.minDate) {
       $scope.dateOptions.minDate = date;
     } else if (date > $scope.dateOptions.maxDate) {
@@ -135,6 +254,8 @@ angular.module('myApp')
       console.log(error);
       return;
     }
+
+    assignAssets();
 
     DateService.setStartDate($scope.dateOptions.minDate);
     DateService.setEndDate($scope.dateOptions.maxDate);
@@ -146,6 +267,8 @@ angular.module('myApp')
     $scope.hwEol[d.Model] = date;
 
     date = $scope.convertToDate(date);
+    assignDateBuckets(date);
+
     if (date < $scope.dateOptions.minDate) {
       $scope.dateOptions.minDate = date;
     } else if (date > $scope.dateOptions.maxDate) {
@@ -156,6 +279,8 @@ angular.module('myApp')
       console.log(error);
       return;
     }
+
+    assignAssets();
 
     DateService.setStartDate($scope.dateOptions.minDate);
     DateService.setEndDate($scope.dateOptions.maxDate);
