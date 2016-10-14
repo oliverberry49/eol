@@ -37,6 +37,11 @@ angular.module('myApp')
     };
   };
 
+  $scope.logout = function() {
+    AuthService.logout();
+    $state.go('login');
+  };
+
   $scope.resetFilters();
   $state.transitionTo('home.dashboard');
 

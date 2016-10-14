@@ -133,6 +133,11 @@ html, body, .eol-container {
   overflow-y: scroll;
 }
 
+.eol-logo {
+  width: calc(100% - 20px);
+  display: inline-block;
+}
+
 .eol-logo-client {
   width: calc(60% - 20px);
   display: inline-block;
