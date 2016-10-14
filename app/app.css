@@ -185,6 +185,10 @@ a:focus, a:hover {
   overflow-y: scroll;
 }
 
+th:hover {
+    cursor: pointer;
+}
+
 /* Graph */
 
 #xaxis .domain, #yaxis .domain {
