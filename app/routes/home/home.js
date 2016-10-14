@@ -3,9 +3,6 @@
 angular.module('myApp')
 
 .controller('HomeCtrl', ['$scope', '$state', '$window', '$q', 'DateService', 'AuthService', function($scope, $state, $window, $q, DateService, AuthService) {
-  if (!AuthService.isLoggedIn()) {
-    $state.go('login');
-  }
 
   $scope.assets = [];
 

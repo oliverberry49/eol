@@ -12,6 +12,21 @@ angular.module('myApp', [
     enabled: true
   });
 
+  var auth = function($q, $state, $timeout, AuthService) {
+    var deferred = $q.defer();
+
+    $timeout(function() {
+      if (!AuthService.isLoggedIn()) {
+        $state.go('login');
+        deferred.reject();
+      } else {
+        deferred.resolve();
+      }
+    });
+
+    return deferred.promise;
+  };
+
   $stateProvider
     .state('login', {
       url: '/login',
@@ -21,7 +36,10 @@ angular.module('myApp', [
     .state('home', {
       url: '/home',
       templateUrl: 'routes/home/home.html',
-      controller: 'HomeCtrl'
+      controller: 'HomeCtrl',
+      resolve: {
+        auth: auth
+      }
     })
     .state('home.dashboard', {
       url: '/dashboard',
@@ -33,5 +51,5 @@ angular.module('myApp', [
     });
 
   $urlRouterProvider
-    .otherwise('/home');
+    .otherwise('/login');
 });
