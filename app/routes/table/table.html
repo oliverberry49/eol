@@ -3,8 +3,12 @@
   <button class="btn btn-default eol-export-btn" ng-csv="exportRows()" filename="eol-assets.csv">Export</button>
 
   <table class="table table-striped">
-    <th ng-repeat="header in headers">{{header}}</th>
-    <tr ng-repeat="row in rows | filter:criteriaMatch as filteredResult">
+    <th ng-repeat="header in headers" ng-click="sortBy(header)">
+      {{header}}
+      <span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true" ng-show="sorted === header && reverse"></span>
+      <span class="glyphicon glyphicon-triangle-top" aria-hidden="true" ng-show="sorted === header && !reverse"></span>
+    </th>
+    <tr ng-repeat="row in rows | orderBy:predicate:reverse | filter:criteriaMatch as filteredResult">
       <td ng-repeat="data in row track by $index">
         <a ng-if="$index === 1" uib-tooltip="EoL: {{osEol[data] || 'Unknown'}}" ng-class="getClass(data, $index)">{{data}}</a>
         <a ng-if="$index === 5" uib-tooltip="EoL: {{hwEol[data] || 'Unknown'}}" ng-class="getClass(data, $index)">{{data}}</a>

@@ -9,6 +9,9 @@ angular.module('myApp')
 
   $scope.assets = [];
 
+  var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'System Classification', 'MODEL']; // 'Application'
+  $scope.headers = ['Host Name', 'OS', 'Region', 'Location', 'Environment', 'Model']; // 'Application'
+
   // General functions
 
   $scope.convertToDate = function(dateString) {
@@ -33,6 +36,9 @@ angular.module('myApp')
       app: "All"
     };
   };
+
+  $scope.resetFilters();
+  $state.transitionTo('home.dashboard');
 
   // Table functions
 
@@ -109,6 +115,22 @@ angular.module('myApp')
     return deferred.promise;
   };
 
+  $scope.sortBy = function(header) {
+    if ($scope.sorted === header) {
+      $scope.reverse = !$scope.reverse;
+    } else {
+      $scope.sorted = header;
+      $scope.reverse = false;
+    }
+    $scope.sortedIndex = $scope.headers.indexOf($scope.sorted);
+  };
+
+  $scope.predicate = function(val) {
+    if ($scope.sorted) {
+      return val[$scope.sortedIndex];
+    }
+  };
+
   // Date picker
 
   $scope.clear = function() {
@@ -147,8 +169,6 @@ angular.module('myApp')
   // Generate data for table, filters and dashboard
 
   var d3 = $window.d3;
-  var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'System Classification', 'MODEL']; // 'Application'
-  $scope.headers = ['Host Name', 'OS', 'Region', 'Location', 'Environment', 'Model']; // 'Application'
   $scope.allrows = [];
   $scope.rows = [];
 
@@ -285,7 +305,4 @@ angular.module('myApp')
     DateService.setStartDate($scope.dateOptions.minDate);
     DateService.setEndDate($scope.dateOptions.maxDate);
   });
-
-  $scope.resetFilters();
-  $state.transitionTo('home.dashboard');
 }]);
