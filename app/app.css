@@ -44,6 +44,10 @@ html, body, .eol-container {
   text-align: center;
 }
 
+.eol-h3 small {
+  color: #cecece;
+}
+
 .eol-home {
   float: left;
   width: 70%;
@@ -187,6 +191,10 @@ a:focus, a:hover {
 
 th:hover {
     cursor: pointer;
+}
+
+small {
+  font-weight: 100;
 }
 
 /* Graph */
