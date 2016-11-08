@@ -10,7 +10,9 @@ Clone the repo and follow the install instructions
 ## Install
 
 ```npm install```
+
 ```npm install -g bower```
+
 ```bower install```
 
 ## Run
