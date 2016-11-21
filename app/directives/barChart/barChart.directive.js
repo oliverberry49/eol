@@ -62,6 +62,7 @@ angular.module('myApp')
 
       var xAxis = d3.svg.axis()
           .orient('bottom')
+          .tickValues([])
           .scale(xscale);
 
       var yAxis = d3.svg.axis()
