@@ -14,7 +14,7 @@ html, body, .eol-container {
 .eol-login-box {
   width: 400px;
   height: 600px;
-  background: red;
+  background: white;
   border: 2px solid #bbb;
   display: flex;
   align-items: center;
