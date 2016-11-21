@@ -15,7 +15,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="(option, val) in filterOptions.os" ng-click="filter.os = option"><a href="#">{{option}}</a></li>
+        <li ng-repeat="option in keys(filterOptions.os) | orderBy:'toString()'" ng-click="filter.os = option"><a href="#">{{option}}</a></li>
       </ul>
     </div>
   </div>
@@ -28,7 +28,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="(option, val) in filterOptions.region" ng-click="filter.region = option"><a href="#">{{option}}</a></li>
+        <li ng-repeat="option in keys(filterOptions.region) | orderBy:'toString()'" ng-click="filter.region = option"><a href="#">{{option}}</a></li>
       </ul>
     </div>
   </div>
@@ -41,7 +41,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="(option, val) in filterOptions.loc" ng-click="filter.loc = option"><a href="#">{{option}}</a></li>
+        <li ng-repeat="option in keys(filterOptions.loc) | orderBy:'toString()'" ng-click="filter.loc = option"><a href="#">{{option}}</a></li>
       </ul>
     </div>
   </div>
@@ -54,7 +54,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="(option, val) in filterOptions.env" ng-click="filter.env = option"><a href="#">{{option}}</a></li>
+        <li ng-repeat="option in keys(filterOptions.env) | orderBy:'toString()'" ng-click="filter.env = option"><a href="#">{{option}}</a></li>
       </ul>
     </div>
   </div>
@@ -67,7 +67,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="(option, val) in filterOptions.model" ng-click="filter.model = option"><a href="#">{{option}}</a></li>
+        <li ng-repeat="option in keys(filterOptions.model) | orderBy:'toString()'" ng-click="filter.model = option"><a href="#">{{option}}</a></li>
       </ul>
     </div>
   </div>
@@ -80,7 +80,7 @@
         <span class="caret"></span>
       </button>
       <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-        <li ng-repeat="(option, val) in filterOptions.app" ng-click="filter.app = option"><a href="#">{{option}}</a></li>
+        <li ng-repeat="option in keys(filterOptions.app) | orderBy:'toString()'" ng-click="filter.app = option"><a href="#">{{option}}</a></li>
       </ul>
     </div>
   </div>

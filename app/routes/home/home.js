@@ -9,6 +9,8 @@ angular.module('myApp')
   var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'Environment', 'MODEL', 'APPLICATION'];
   $scope.headers = ['Host Name', 'OS', 'Region', 'Location', 'Environment', 'Model', 'Application'];
 
+  var all = '_All';
+
   // General functions
 
   $scope.convertToDate = function(dateString) {
@@ -25,12 +27,12 @@ angular.module('myApp')
 
   $scope.resetFilters = function() {
     $scope.filter = {
-      os: "All",
-      loc: "All",
-      region: "All",
-      env: "All",
-      model: "All",
-      app: "All"
+      os: all,
+      loc: all,
+      region: all,
+      env: all,
+      model: all,
+      app: all
     };
   };
 
@@ -79,12 +81,12 @@ angular.module('myApp')
     var osEol = $scope.convertToDate($scope.osEol[os]);
     var hwEol = $scope.convertToDate($scope.hwEol[model]);
 
-    return ($scope.filter.os === 'All' || $scope.filter.os === os) &&
-      ($scope.filter.region === 'All' || $scope.filter.region === region) &&
-      ($scope.filter.loc === 'All' || $scope.filter.loc === loc) &&
-      ($scope.filter.env === 'All' || $scope.filter.env === env) &&
-      ($scope.filter.model === 'All' || $scope.filter.model === model) &&
-      ($scope.filter.app === 'All' || $scope.filter.app === app) &&
+    return ($scope.filter.os === all || $scope.filter.os === os) &&
+      ($scope.filter.region === all || $scope.filter.region === region) &&
+      ($scope.filter.loc === all || $scope.filter.loc === loc) &&
+      ($scope.filter.env === all || $scope.filter.env === env) &&
+      ($scope.filter.model === all || $scope.filter.model === model) &&
+      ($scope.filter.app === all || $scope.filter.app === app) &&
       ((osEol > $scope.startDate && osEol < $scope.endDate) ||
         (hwEol > $scope.startDate && hwEol < $scope.endDate));
   };
@@ -189,12 +191,23 @@ angular.module('myApp')
   $scope.twentyfourMonths.setMonth($scope.twentyfourMonths.getMonth() + 24);
 
   $scope.filterOptions = {
-    os: {'All': true},
-    region: {'All': true},
-    loc: {'All': true},
-    env: {'All': true},
-    model: {'All': true},
-    app: {'All': true}
+    os: {},
+    region: {},
+    loc: {},
+    env: {},
+    model: {},
+    app: {}
+  };
+
+  $scope.filterOptions.os[all] = true;
+  $scope.filterOptions.region[all] = true;
+  $scope.filterOptions.loc[all] = true;
+  $scope.filterOptions.env[all] = true;
+  $scope.filterOptions.model[all] = true;
+  $scope.filterOptions.app[all] = true;
+
+  $scope.keys = function(obj) {
+    return obj ? Object.keys(obj) : [];
   };
 
   var overview = {

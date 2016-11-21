@@ -7,6 +7,8 @@ angular.module('myApp')
     $state.go('login');
   }
 
+  var all = '_All';
+
   $scope.getClass = function(d, i) {
     var dateString;
     if (i === 1) {
@@ -42,12 +44,12 @@ angular.module('myApp')
     var osEol = $scope.convertToDate($scope.osEol[os]);
     var hwEol = $scope.convertToDate($scope.hwEol[model]);
 
-    return ($scope.filter.os === 'All' || $scope.filter.os === os) &&
-      ($scope.filter.region === 'All' || $scope.filter.region === region) &&
-      ($scope.filter.loc === 'All' || $scope.filter.loc === loc) &&
-      ($scope.filter.env === 'All' || $scope.filter.env === env) &&
-      ($scope.filter.model === 'All' || $scope.filter.model === model) &&
-      ($scope.filter.app === 'All' || $scope.filter.app === app) &&
+    return ($scope.filter.os === all || $scope.filter.os === os) &&
+      ($scope.filter.region === all || $scope.filter.region === region) &&
+      ($scope.filter.loc === all || $scope.filter.loc === loc) &&
+      ($scope.filter.env === all || $scope.filter.env === env) &&
+      ($scope.filter.model === all || $scope.filter.model === model) &&
+      ($scope.filter.app === all || $scope.filter.app === app) &&
       ((osEol > $scope.startDate && osEol < $scope.endDate) ||
         (hwEol > $scope.startDate && hwEol < $scope.endDate));
   };
