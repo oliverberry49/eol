@@ -6,8 +6,8 @@ angular.module('myApp')
 
   $scope.assets = [];
 
-  var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'System Classification', 'MODEL']; // 'Application'
-  $scope.headers = ['Host Name', 'OS', 'Region', 'Location', 'Environment', 'Model']; // 'Application'
+  var headers = ['Host Name', 'OS', 'REGION', 'LOCATION', 'Environment', 'MODEL', 'APPLICATION'];
+  $scope.headers = ['Host Name', 'OS', 'Region', 'Location', 'Environment', 'Model', 'Application'];
 
   // General functions
 
@@ -74,6 +74,7 @@ angular.module('myApp')
     var loc = row[3];
     var env = row[4];
     var model = row[5];
+    var app = row[6];
 
     var osEol = $scope.convertToDate($scope.osEol[os]);
     var hwEol = $scope.convertToDate($scope.hwEol[model]);
@@ -83,6 +84,7 @@ angular.module('myApp')
       ($scope.filter.loc === 'All' || $scope.filter.loc === loc) &&
       ($scope.filter.env === 'All' || $scope.filter.env === env) &&
       ($scope.filter.model === 'All' || $scope.filter.model === model) &&
+      ($scope.filter.app === 'All' || $scope.filter.app === app) &&
       ((osEol > $scope.startDate && osEol < $scope.endDate) ||
         (hwEol > $scope.startDate && hwEol < $scope.endDate));
   };
